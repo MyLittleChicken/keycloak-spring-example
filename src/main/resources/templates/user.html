@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Keycloak Demo - 사용자 페이지</title>
+</head>
+<body>
+    <section>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4>사용자 페이지</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-success">
+                            <p>이 페이지는 인증된 사용자(유저 또는 어드민)만 접근할 수 있습니다.</p>
+                        </div>
+                        
+                        <div class="card mt-4">
+                            <div class="card-header">
+                                <h5>사용자 정보</h5>
+                            </div>
+                            <div class="card-body">
+                                <p><strong>권한 정보:</strong> 
+                                    <span th:if="${isAdmin}" class="badge bg-danger">관리자</span>
+                                    <span th:if="${isUser}" class="badge bg-primary">사용자</span>
+                                </p>
+                                <p>사용자 페이지에서는 개인화된 콘텐츠를 볼 수 있습니다.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <a th:href="@{/}" class="btn btn-primary">홈으로 이동</a>
+                            <a th:href="@{/public}" class="btn btn-info">공개 페이지로 이동</a>
+                            <a th:if="${isAdmin}" th:href="@{/admin}" class="btn btn-danger">관리자 페이지로 이동</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

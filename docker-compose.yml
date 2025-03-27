@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  keycloak:
+    image: docker.io/keycloak/keycloak:latest
+    container_name: keycloak
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=dev-file
+      - KC_HOSTNAME=localhost
+      - KC_HOSTNAME_PORT=8180
+      - KC_HTTP_ENABLED=true
+      - KC_HTTP_PORT=8080
+    ports:
+      - "8180:8080"
+    command:
+      - start-dev
+      - --import-realm
+    volumes:
+      - keycloak-data:/opt/keycloak/data
+      - ./keycloak-config:/opt/keycloak/data/import
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/realms/master"]
+      interval: 5s
+      timeout: 2s
+      retries: 15
+
+volumes:
+  keycloak-data:

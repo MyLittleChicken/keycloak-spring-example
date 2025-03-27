@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout/base :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Keycloak Demo - 로그인</title>
+</head>
+<body>
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>로그인</h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${successMessage}" class="alert alert-success" 
+                             th:text="${successMessage}"></div>
+                        <div th:if="${errorMessage}" class="alert alert-danger" 
+                             th:text="${errorMessage}"></div>
+                        <div th:if="${param.logout}" class="alert alert-success">
+                            로그아웃 되었습니다.
+                        </div>
+                        
+                        <!-- 프로그래밍 방식 로그인 폼 -->
+                        <form method="post" th:action="@{/login}">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">사용자 이름</label>
+                                <input type="text" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">비밀번호</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">로그인</button>
+                            </div>
+                        </form>
+                        
+                        <div class="mt-3 text-center">
+                            <p>계정이 없으신가요? <a th:href="@{/register}">회원가입</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

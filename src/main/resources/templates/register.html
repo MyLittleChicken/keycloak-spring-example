@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+      th:replace="~{layout/base :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Keycloak Demo - 회원가입</title>
+</head>
+<body>
+    <section>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>회원가입</h4>
+                    </div>
+                    <div class="card-body">
+                        <div th:if="${errorMessage}" class="alert alert-danger" 
+                             th:text="${errorMessage}"></div>
+                             
+                        <form th:action="@{/register}" th:object="${user}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">사용자 이름</label>
+                                <input type="text" class="form-control" id="username" 
+                                       th:field="*{username}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">이메일</label>
+                                <input type="email" class="form-control" id="email" 
+                                       th:field="*{email}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="firstName" class="form-label">이름</label>
+                                <input type="text" class="form-control" id="firstName" 
+                                       th:field="*{firstName}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="lastName" class="form-label">성</label>
+                                <input type="text" class="form-control" id="lastName" 
+                                       th:field="*{lastName}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">비밀번호</label>
+                                <input type="password" class="form-control" id="password" 
+                                       th:field="*{password}" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">회원가입</button>
+                        </form>
+                        
+                        <div class="mt-3">
+                            <p>이미 계정이 있으신가요? <a th:href="@{/login}">로그인</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
